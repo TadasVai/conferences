@@ -13,15 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', static function () {
-    return view('home.index', []);
-})->name('home.index');
+Route::view('/', 'home.index')->name('home.index'); //Sutrumpinta versija, kuri veikia tik atvaizduoti route
+
 
 Route::get('/contact', static function () {
     return view('home.contact', []);
 })->name('home.contact');
 
-Route::get('/conference/{id}', function ($conferenceId) {
+Route::get('/conferences/{id}', function ($conferenceId) {
     $conferences = [
         1=>[
             'title' => 'First article',
@@ -32,8 +31,12 @@ Route::get('/conference/{id}', function ($conferenceId) {
             'content' => 'Second conference text 12345'
         ]
     ];
+
+    abort_if(!isset($conferences[$conferenceId]), 404);
+
     return view('conferences.show', ['conference' => $conferences[$conferenceId]]);
 })->name('conference.show');
+//Route::view('/conferences', 'conferences.index') ->name('conferences.index');
 
 
 //Route::get('/', function () {

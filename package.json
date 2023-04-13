@@ -15,5 +15,10 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.60.0",
         "sass-loader": "^12.1.0"
+    },
+    "dependencies": {
+        "jquery": "^3.6.4",
+        "llama-bootstrap-datetimepicker": "^2.4.4",
+        "spectre.css": "^0.5.9"
     }
 }

@@ -10,4 +10,7 @@
 <body>
 <div>@yield('content')</div>
 </body>
+<body>
+<div>@yield('address')</div>
+</body>
 </html>

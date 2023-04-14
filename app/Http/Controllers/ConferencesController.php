@@ -2,31 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 
 class ConferencesController extends Controller
 {
-    /**
-     * @var array
-     */
-
-    protected array $conferences = [
-    1=>[
-        'title' => 'First article',
-        'content' => 'First conference text 12345'
-    ],
-    2=>[
-        'title' => 'Second article',
-        'content' => 'Second conference text 12345'
-    ]
-];
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        return view('conferences.index', ['conference' => $this->conferences]);
+        $conference = new Conference();
+
+        return view('conferences.index', ['conference' => $conference->all()]);
     }
 
     /**
@@ -53,9 +42,7 @@ class ConferencesController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        abort_if(!isset($this->conferences[$id]), 404);
-
-        return view('conferences.show', ['conference' => $this->conferences[$id]]);
+        return view('conference.show', ['conference' => Conference::findOrFail($id)]);
     }
 
     /**

@@ -20,7 +20,7 @@ class ConferencesController extends Controller
 
         //return view('conferences.index', ['conference' => $conference->all()]);
 
-        return \view('conferences.show');
+        return \view('conferences.index');
     }
 
     /**
@@ -76,7 +76,7 @@ class ConferencesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return \view('conferences.edit');
     }
 
     /**

@@ -24,7 +24,7 @@ use \App\Http\Controllers\ConferencesController;
 Route::get('/', [HomeController::class, 'index']) ->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact']) ->name('home.contact');
 
-Route::resource('conferences', ConferencesController::class)->only(['index', 'show', 'create', 'store']);
+Route::resource('conferences', ConferencesController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update']);
 
 
 

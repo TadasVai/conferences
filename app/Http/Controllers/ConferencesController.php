@@ -6,6 +6,7 @@ use App\Models\Conference;
 use Couchbase\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreConferenceRequest;
 
 class ConferencesController extends Controller
 {
@@ -38,20 +39,25 @@ class ConferencesController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreConferenceRequest $request, Conference $conference): RedirectResponse
     {
         //$request->validate([
         //    'title'=>'required|min:3|max:50',
-        //    'content'=>'required|min10'
+        //    'content'=>'required|min:10',
+        //    'address'=>'required|min:5'
         //]);
 
-        $conference = new Conference();
-        $conference->title = $request->input('title');
-        $conference->content = $request->input('content');
-        $conference->address = $request->input('address');
-        $conference->save();
+        //$conference = new Conference();
+        $validated = $request->validated();
+        $conferenceItem = $conference->create($validated);
+        //$conference->title = $request->input('title');
+        //$conference->content = $request->input('content');
+        //$conference->address = $request->input('address');
+        //$conference->save();
 
-        return redirect()-> route('conferences.show', ['id'=>$conference->id]);
+        $request->session()->flash('status', 'Conference created!');
+
+        return redirect()-> route('conferences.show', ['conference'=>$conferenceItem->id]);
     }
 
     /**
@@ -62,7 +68,7 @@ class ConferencesController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        return view('conference.show', ['conference' => Conference::findOrFail($id)]);
+        return view('conferences.show', ['conference' => Conference::findOrFail($id)]);
     }
 
     /**

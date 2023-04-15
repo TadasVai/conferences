@@ -40,10 +40,10 @@ class ConferencesController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'title'=>'required|min:3|max:50',
-            'content'=>'required|min10'
-        ]);
+        //$request->validate([
+        //    'title'=>'required|min:3|max:50',
+        //    'content'=>'required|min10'
+        //]);
 
         $conference = new Conference();
         $conference->title = $request->input('title');

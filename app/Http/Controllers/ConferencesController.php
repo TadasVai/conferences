@@ -7,6 +7,7 @@ use Couchbase\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreConferenceRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ConferencesController extends Controller
 {
@@ -20,7 +21,10 @@ class ConferencesController extends Controller
 
         //return view('conferences.index', ['conference' => $conference->all()]);
 
-        return \view('conferences.index');
+        //return \view('conferences.index');
+        $conferences = Conference::all(); // assuming "Conference" is the model for conferences
+
+        return view('conferences.index', compact('conferences'));
     }
 
     /**
@@ -74,24 +78,44 @@ class ConferencesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Conference $conference)
     {
-        return \view('conferences.edit');
+
+        return view('conferences.edit', compact('conference'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param StoreConferenceRequest $request
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(StoreConferenceRequest $request, int $id): RedirectResponse
     {
-        //
+        $conference = Conference::findOrFail($id);
+        $validated = $request->validated();
+        $conference->fill($validated);
+        $conference->save();
+
+        $request->session()->flash('status', 'Article was updated!');
+
+        return redirect()->route('conferences.show', ['conference'=>$conference->id]);
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $conference = Conference::findOrFail($id);
+        $conference->delete();
+
+        session()->flash('status', 'Conference was deleted!');
+
+        return redirect()->route('conferences.index');
     }
 }

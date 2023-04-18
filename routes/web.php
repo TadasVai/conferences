@@ -31,8 +31,8 @@ Route::get('/contact', [HomeController::class, 'contact']) ->name('home.contact'
 Route::resource('conferences', ConferencesController::class);
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
-Route::get('login', [LoginController::class, 'login'])->name('login');
-Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
 

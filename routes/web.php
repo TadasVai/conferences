@@ -23,7 +23,7 @@ use \App\Http\Controllers\Auth\LoginController;
 //    return view('home.contact', []);
 //})->name('home.contact');
 
-Route::get('/', [HomeController::class, 'index']) ->name('home.index');
+Route::get('/', [ConferencesController::class, 'index']) ->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact']) ->name('home.contact');
 
 //Route::resource('conferences', ConferencesController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update']);
@@ -59,3 +59,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //Route::get('/', function () {
 //    return 'Welcome to the home page';
 //});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

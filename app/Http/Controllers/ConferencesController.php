@@ -98,7 +98,7 @@ class ConferencesController extends Controller
         $conference->fill($validated);
         $conference->save();
 
-        $request->session()->flash('status', 'Article was updated!');
+        $request->session()->flash('status', 'Conference was updated!');
 
         return redirect()->route('conferences.show', ['conference'=>$conference->id]);
     }

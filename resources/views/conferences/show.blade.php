@@ -5,5 +5,7 @@
     @endif
     <h1>{{$conference['title']}}</h1>
     <p>{{$conference['content']}}</p>
+    <p>{{$conference['date']}}</p>
     <p>{{$conference['address']}}</p>
+    <a href="{{ route('conferences.index') }}"><button>Go to the main page</button></a>
 @endsection

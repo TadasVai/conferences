@@ -13,6 +13,13 @@
     @enderror
 </div>
 <div>
+    <label for="date-input">Date</label>
+    <input id="date-input" type="date" name="date" value="{{old('date', optional($conference ?? null)->date)}}" required>
+    @error('date')
+    <p>{{$message}}</p>
+    @enderror
+</div>
+<div>
     <label for="address-input">Address</label>
     <textarea id="address-input" type="text" name="address">{{old('address', optional($conference ?? null)->address)}}</textarea>
     @error('address')

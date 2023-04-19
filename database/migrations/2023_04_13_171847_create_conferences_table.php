@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->String('title');
             $table->text('content')-> nullable();
+            $table->date('date')->nullable();
             $table->String('address');
             $table->timestamps();
         });

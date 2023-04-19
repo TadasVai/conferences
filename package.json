@@ -10,13 +10,17 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.11.6",
         "axios": "^0.21",
+        "bootstrap": "^5.2.3",
         "laravel-mix": "^6.0.6",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.60.0",
+        "sass": "^1.56.1",
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "bootstrap": "^5.3.0-alpha3",
+        "bootstrap-timepicker": "^0.5.2",
         "jquery": "^3.6.4",
         "llama-bootstrap-datetimepicker": "^2.4.4",
         "spectre.css": "^0.5.9"

@@ -60,6 +60,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //    return 'Welcome to the home page';
 //});
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

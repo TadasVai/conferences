@@ -10,8 +10,8 @@
 <form action="{{route('login')}}" method="POST">
     @csrf
     <div>
-        <label for="title-input">Username</label>
-        <input type="text" id="title-input" name="username" value="{{old('username')}}">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{old('username')}}">
         @error('username')
         <p>{{$message}}</p>
         @enderror

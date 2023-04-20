@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Conference Show Form')
 @section('content')
     @if(session('status'))
         <div style="background-color: green; color: lime;">{{session('status')}}</div>

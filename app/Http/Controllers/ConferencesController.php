@@ -11,17 +11,18 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ConferencesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create', 'edit', 'update', 'destroy');
+    }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        //$conference = new Conference();
 
-        //return view('conferences.index', ['conference' => $conference->all()]);
-
-        //return \view('conferences.index');
         $conferences = Conference::all(); // assuming "Conference" is the model for conferences
 
         return view('conferences.index', compact('conferences'));
@@ -45,19 +46,8 @@ class ConferencesController extends Controller
      */
     public function store(StoreConferenceRequest $request, Conference $conference): RedirectResponse
     {
-        //$request->validate([
-        //    'title'=>'required|min:3|max:50',
-        //    'content'=>'required|min:10',
-        //    'address'=>'required|min:5'
-        //]);
-
-        //$conference = new Conference();
         $validated = $request->validated();
         $conferenceItem = $conference->create($validated);
-        //$conference->title = $request->input('title');
-        //$conference->content = $request->input('content');
-        //$conference->address = $request->input('address');
-        //$conference->save();
 
         $request->session()->flash('status', 'Conference created!');
 
